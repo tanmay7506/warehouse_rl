@@ -53,10 +53,10 @@ String commands parsed from LLM output:
 |---|---|
 | Move closer to target | +1.0 |
 | Move further from target | −5.0 |
-| Step cost | −1.0 |
+| Step cost | −0.01 |
 | Collision with another agent | −10.0 |
-| Successful delivery | +100.0 |
-| Reach navigation target (Task 1) | +100.0 |
+| Successful delivery | +50.0 |
+| Reach navigation target (Task 1) | +50.0 |
 
 ---
 
