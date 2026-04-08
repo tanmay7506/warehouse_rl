@@ -1,0 +1,48 @@
+name: warehouse_env
+version: "1.0.0"
+description: >
+  A 3-level Warehouse Robot RL environment where AI agents learn to navigate,
+  pick up items from 3D shelves, and deliver them to dropoff zones.
+  Supports single-agent (levels 1-2) and multi-agent cooperative play (level 3).
+  Returns RGB visual observations (base64 PNG, 256x256) alongside structured state.
+
+author: ""
+license: MIT
+
+environment:
+  entry_point: warehouse_env.server.app:app
+  action_type: warehouse_env.models.WarehouseAction
+  observation_type: warehouse_env.models.WarehouseObservation
+  env_class: warehouse_env.server.warehouse_environment:WarehouseEnvironment
+
+tasks:
+  - id: task_level_1
+    name: "Easy – Navigate to Target"
+    description: "Single agent must navigate to a randomly placed target cell."
+    difficulty: easy
+    max_steps: 100
+    reward_range: [-1.0, 1.0]
+
+  - id: task_level_2
+    name: "Medium – Pick & Deliver One Item"
+    description: "Single agent must pick one item from a shelf and deliver to dropoff zone."
+    difficulty: medium
+    max_steps: 150
+    reward_range: [-10.0, 100.0]
+
+  - id: task_level_3
+    name: "Hard – Multi-Agent Cooperative Delivery"
+    description: "3 agents cooperate to deliver all items while avoiding collisions."
+    difficulty: hard
+    max_steps: 200
+    reward_range: [-10.0, 100.0]
+
+hardware:
+  tier: cpu_basic
+  vcpu: 2
+  memory_gb: 8
+
+server:
+  port: 7860
+  workers: 2
+  max_concurrent_envs: 10
